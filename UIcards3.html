@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finance Dashboard UI</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#2d6f5e;
+      font-family:Inter, sans-serif;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:40px;
+      color:#111;
+    }
+
+    .dashboard{
+      width:1100px;
+      display:grid;
+      grid-template-columns:1.1fr .55fr 1fr;
+      gap:18px;
+    }
+
+    .column{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .card{
+      border-radius:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* =========================
+       LEFT BIG CARD
+    ========================== */
+
+    .expenses{
+      background:#13171b;
+      color:#fff;
+      padding:26px;
+      min-height:680px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 18px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:600;
+      background:#d8f36c;
+      color:#111;
+    }
+
+    .subtitle{
+      margin-top:18px;
+      font-size:16px;
+      color:#e9e9e9;
+    }
+
+    .circle-wrap{
+      width:340px;
+      height:340px;
+      margin:55px auto 35px;
+      position:relative;
+    }
+
+    .circle-wrap svg{
+      width:100%;
+      height:100%;
+      transform:rotate(-90deg);
+    }
+
+    .circle-wrap .center{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:92px;
+      font-weight:700;
+      letter-spacing:-5px;
+      color:#f3f3f3;
+    }
+
+    .legend{
+      margin-top:20px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:18px;
+    }
+
+    .legend-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+    }
+
+    .teal{ background:#34c2b3; }
+    .purple{ background:#8d73f6; }
+    .lime{ background:#d8f36c; }
+    .orange{ background:#f3ca7a; }
+
+    /* =========================
+       CENTER COLUMN
+    ========================== */
+
+    .balance-card{
+      background:#d8f36c;
+      padding:22px;
+      min-height:225px;
+    }
+
+    .icon{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:#111;
+      color:#d8f36c;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      font-weight:700;
+    }
+
+    .percent{
+      position:absolute;
+      top:24px;
+      right:24px;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .money{
+      font-size:70px;
+      font-weight:700;
+      margin-top:45px;
+      letter-spacing:-3px;
+    }
+
+    .small{
+      font-size:16px;
+      margin-top:6px;
+      opacity:.8;
+    }
+
+    /* ========================= */
+
+    .progress-card{
+      background:#ececec;
+      padding:24px;
+      min-height:200px;
+    }
+
+    .progress-title{
+      font-size:16px;
+      margin-bottom:26px;
+    }
+
+    .progress-value{
+      font-size:64px;
+      font-weight:700;
+      letter-spacing:-3px;
+    }
+
+    .green-pill{
+      position:absolute;
+      left:22px;
+      bottom:20px;
+      background:#55b69f;
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:600;
+    }
+
+    /* ========================= */
+
+    .subs-card{
+      background:#8973eb;
+      color:#fff;
+      padding:22px;
+      min-height:235px;
+    }
+
+    .mini{
+      font-size:14px;
+      opacity:.8;
+      text-transform:uppercase;
+    }
+
+    .subs{
+      font-size:52px;
+      font-weight:700;
+      margin-top:8px;
+    }
+
+    .price{
+      font-size:70px;
+      font-weight:700;
+      margin-top:20px;
+      letter-spacing:-3px;
+    }
+
+    .bottom-text{
+      position:absolute;
+      left:22px;
+      bottom:22px;
+      font-size:15px;
+      line-height:1.5;
+      opacity:.9;
+    }
+
+    /* =========================
+       RIGHT TOP
+    ========================== */
+
+    .performance-card{
+      background:#13171b;
+      color:#fff;
+      padding:24px;
+      min-height:405px;
+    }
+
+    .orange-pill{
+      background:#f3ca7a;
+      color:#111;
+      padding:9px 16px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:600;
+      display:inline-block;
+    }
+
+    .performance-number{
+      font-size:82px;
+      font-weight:700;
+      letter-spacing:-5px;
+      margin-top:18px;
+    }
+
+    .performance-sub{
+      font-size:18px;
+      opacity:.9;
+      margin-top:4px;
+    }
+
+    .bars{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:48px;
+      height:220px;
+      display:flex;
+      align-items:flex-end;
+      gap:12px;
+    }
+
+    .bar{
+      flex:1;
+      background:#8d73f6;
+      border-radius:12px 12px 8px 8px;
+      position:relative;
+    }
+
+    .bar::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:8px;
+      background:#d8f36c;
+      border-radius:12px 12px 0 0;
+    }
+
+    .bar span{
+      position:absolute;
+      top:12px;
+      left:50%;
+      transform:translateX(-50%);
+      color:#fff;
+      font-size:16px;
+      font-weight:600;
+    }
+
+    .see{
+      position:absolute;
+      left:24px;
+      bottom:18px;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      opacity:.8;
+    }
+
+    .see::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#8d73f6;
+    }
+
+    /* =========================
+       BALANCE GRAPH
+    ========================== */
+
+    .graph-card{
+      background:#d8f36c;
+      padding:22px;
+      min-height:255px;
+      overflow:hidden;
+    }
+
+    .tabs{
+      position:absolute;
+      top:22px;
+      right:22px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .tab{
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .active{
+      background:#111;
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+
+    .stats{
+      margin-top:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      font-size:16px;
+    }
+
+    .stats span{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .stats span::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#8d73f6;
+    }
+
+    .big-percent{
+      position:absolute;
+      left:20px;
+      bottom:0;
+      font-size:120px;
+      font-weight:700;
+      letter-spacing:-7px;
+      line-height:1;
+    }
+
+    .chart{
+      position:absolute;
+      right:12px;
+      bottom:10px;
+      width:58%;
+      height:75%;
+    }
+
+    .chart svg{
+      width:100%;
+      height:100%;
+    }
+
+    @media(max-width:1050px){
+
+      .dashboard{
+        grid-template-columns:1fr;
+      }
+
+      .circle-wrap{
+        width:280px;
+        height:280px;
+      }
+
+      .money,
+      .price,
+      .performance-number{
+        font-size:58px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <section class="dashboard">
+
+    <!-- LEFT -->
+    <div class="column">
+
+      <div class="card expenses">
+
+        <div class="pill">EXPENSES</div>
+        <div class="subtitle">In the past 7 days</div>
+
+        <div class="circle-wrap">
+
+          <svg viewBox="0 0 220 220">
+
+            <circle
+              cx="110"
+              cy="110"
+              r="78"
+              stroke="#8d73f6"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-dasharray="120 400"
+              fill="none"
+            />
+
+            <circle
+              cx="110"
+              cy="110"
+              r="78"
+              stroke="#d8f36c"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-dasharray="80 400"
+              stroke-dashoffset="-135"
+              fill="none"
+            />
+
+            <circle
+              cx="110"
+              cy="110"
+              r="78"
+              stroke="#f3ca7a"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-dasharray="65 400"
+              stroke-dashoffset="-235"
+              fill="none"
+            />
+
+            <circle
+              cx="110"
+              cy="110"
+              r="78"
+              stroke="#34c2b3"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-dasharray="170 400"
+              stroke-dashoffset="-320"
+              fill="none"
+            />
+
+          </svg>
+
+          <div class="center">32K</div>
+
+        </div>
+
+        <div class="legend">
+
+          <div class="legend-item">
+            <div class="legend-left">
+              <div class="dot teal"></div>
+              <span>Relax</span>
+            </div>
+            <strong>54%</strong>
+          </div>
+
+          <div class="legend-item">
+            <div class="legend-left">
+              <div class="dot purple"></div>
+              <span>Food</span>
+            </div>
+            <strong>27%</strong>
+          </div>
+
+          <div class="legend-item">
+            <div class="legend-left">
+              <div class="dot lime"></div>
+              <span>Transport</span>
+            </div>
+            <strong>12%</strong>
+          </div>
+
+          <div class="legend-item">
+            <div class="legend-left">
+              <div class="dot orange"></div>
+              <span>Pets</span>
+            </div>
+            <strong>7%</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CENTER -->
+    <div class="column">
+
+      <div class="card balance-card">
+
+        <div class="icon">↑</div>
+        <div class="percent">+3,51 %</div>
+
+        <div class="money">$ 1248</div>
+        <div class="small">Current balance</div>
+
+      </div>
+
+      <div class="card progress-card">
+
+        <div class="progress-title">Progress</div>
+        <div class="progress-value">↑72,5%</div>
+
+        <div class="green-pill">+0,10 (+0,13%)</div>
+
+      </div>
+
+      <div class="card subs-card">
+
+        <div class="mini">THIS MONTH</div>
+        <div class="subs">4 subs</div>
+
+        <div class="mini" style="margin-top:18px;">TOTAL</div>
+        <div class="price">$25.99</div>
+
+        <div class="bottom-text">
+          NEXT PAYMENT IN 4 DAYS<br>
+          <strong>Spotify - $9.99</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="column">
+
+      <!-- PERFORMANCE -->
+      <div class="card performance-card">
+
+        <div class="orange-pill">PERFORMANCE</div>
+
+        <div class="performance-number">+280%</div>
+        <div class="performance-sub">In the past 30 days</div>
+
+        <div class="bars">
+
+          <div class="bar" style="height:80px;">
+            <span>12%</span>
+          </div>
+
+          <div class="bar" style="height:160px;">
+            <span>78%</span>
+          </div>
+
+          <div class="bar" style="height:115px;">
+            <span>62%</span>
+          </div>
+
+          <div class="bar" style="height:140px;">
+            <span>70%</span>
+          </div>
+
+          <div class="bar" style="height:160px;">
+            <span>75%</span>
+          </div>
+
+          <div class="bar" style="height:220px;">
+            <span>95%</span>
+          </div>
+
+        </div>
+
+        <div class="see">SEE ALL</div>
+
+      </div>
+
+      <!-- GRAPH -->
+      <div class="card graph-card">
+
+        <h2>Balance</h2>
+
+        <div class="tabs">
+          <div class="tab">WEEKLY</div>
+          <div class="tab active">MONTHLY</div>
+        </div>
+
+        <div class="stats">
+          <span>12450 (40%)</span>
+          <span>11252 (11%)</span>
+        </div>
+
+        <div class="big-percent">5%</div>
+
+        <div class="chart">
+
+          <svg viewBox="0 0 400 220" fill="none">
+
+            <!-- Grid -->
+            <g opacity=".15">
+              <line x1="20" y1="20" x2="20" y2="180" stroke="#111"/>
+              <line x1="80" y1="20" x2="80" y2="180" stroke="#111"/>
+              <line x1="140" y1="20" x2="140" y2="180" stroke="#111"/>
+              <line x1="200" y1="20" x2="200" y2="180" stroke="#111"/>
+              <line x1="260" y1="20" x2="260" y2="180" stroke="#111"/>
+              <line x1="320" y1="20" x2="320" y2="180" stroke="#111"/>
+            </g>
+
+            <!-- Purple line -->
+            <path
+              d="M20 120
+                 C60 40, 90 140, 140 80
+                 S220 150, 260 90
+                 S330 140, 360 80"
+              stroke="#8d73f6"
+              stroke-width="4"
+              stroke-dasharray="8 8"
+              fill="none"
+              stroke-linecap="round"
+            />
+
+            <!-- Green line -->
+            <path
+              d="M20 160
+                 C60 160, 80 110, 120 110
+                 S180 50, 220 90
+                 S280 120, 320 40"
+              stroke="#34c2b3"
+              stroke-width="5"
+              fill="none"
+              stroke-linecap="round"
+            />
+
+            <circle cx="185" cy="92" r="8" fill="#8d73f6"/>
+
+            <!-- Tooltip -->
+            <rect x="150" y="30" width="80" height="52" rx="12" fill="#fff"/>
+            <text x="190" y="52" text-anchor="middle" fill="#111" font-size="18" font-weight="700">
+              12 450
+            </text>
+            <text x="190" y="70" text-anchor="middle" fill="#555" font-size="12">
+              PROFIT
+            </text>
+
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>

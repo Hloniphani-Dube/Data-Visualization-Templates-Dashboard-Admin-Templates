@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitness Dashboard</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#d9d2ca;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+
+    .dashboard{
+      width:1200px;
+      background:#f6f3ef;
+      border-radius:28px;
+      padding:30px;
+      display:flex;
+      gap:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    /* SIDEBAR */
+
+    .sidebar{
+      width:90px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:14px;
+      font-weight:700;
+      color:#222;
+      margin-bottom:30px;
+    }
+
+    .menu{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .menu .icon{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:#888;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .menu .icon.active{
+      background:#111;
+      color:#ffcf33;
+    }
+
+    .profile{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      overflow:hidden;
+    }
+
+    .profile img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* MAIN */
+
+    .main{
+      flex:1;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+    }
+
+    .welcome h1{
+      font-size:30px;
+      color:#222;
+    }
+
+    .welcome p{
+      color:#888;
+      font-size:14px;
+    }
+
+    .search-box{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .search{
+      background:white;
+      padding:12px 18px;
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:280px;
+    }
+
+    .search input{
+      border:none;
+      outline:none;
+      width:100%;
+      background:transparent;
+    }
+
+    .upgrade-btn{
+      background:#111;
+      color:white;
+      border:none;
+      padding:12px 22px;
+      border-radius:30px;
+      cursor:pointer;
+      font-weight:500;
+    }
+
+    /* GRID */
+
+    .grid{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:26px;
+      padding:24px;
+      position:relative;
+    }
+
+    /* WORKOUT CARD */
+
+    .workout{
+      background:#d6cbbf;
+      overflow:hidden;
+      min-height:280px;
+    }
+
+    .workout h3{
+      font-size:24px;
+      color:#222;
+      margin-bottom:10px;
+    }
+
+    .bubbles{
+      position:relative;
+      height:180px;
+      margin-top:10px;
+    }
+
+    .bubble{
+      position:absolute;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      font-weight:600;
+      color:#222;
+      backdrop-filter:blur(10px);
+    }
+
+    .bubble1{
+      width:220px;
+      height:220px;
+      background:rgba(255,223,77,0.7);
+      right:40px;
+      top:0;
+      box-shadow:0 0 40px rgba(255,223,77,0.5);
+    }
+
+    .bubble2{
+      width:140px;
+      height:140px;
+      background:rgba(255,120,120,0.55);
+      left:120px;
+      bottom:-10px;
+      box-shadow:0 0 35px rgba(255,120,120,0.4);
+    }
+
+    .bubble3{
+      width:110px;
+      height:110px;
+      background:rgba(0,0,0,0.65);
+      color:white;
+      left:150px;
+      top:0;
+    }
+
+    .legend{
+      display:flex;
+      gap:18px;
+      margin-top:15px;
+      font-size:13px;
+    }
+
+    .legend span{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#555;
+    }
+
+    .dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+    }
+
+    .yellow{ background:#ffd447; }
+    .red{ background:#ff7878; }
+    .black{ background:#111; }
+
+    /* CALENDAR */
+
+    .calendar{
+      background:#141414;
+      color:white;
+    }
+
+    .calendar h3{
+      margin-bottom:20px;
+    }
+
+    .days{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:12px;
+      text-align:center;
+    }
+
+    .day{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:auto;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .day.active{
+      background:#ffd447;
+      color:#111;
+      font-weight:600;
+    }
+
+    .day.done{
+      background:#2f2f2f;
+    }
+
+    /* BOTTOM GRID */
+
+    .bottom{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:1fr 2fr;
+      gap:20px;
+    }
+
+    .mini-card{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:170px;
+    }
+
+    .steps-circle{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      border:10px solid #ff875f;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:auto;
+      font-size:24px;
+      font-weight:700;
+      color:#222;
+    }
+
+    .weight-bar{
+      width:100%;
+      height:14px;
+      background:#ddd;
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:20px;
+    }
+
+    .weight-fill{
+      width:68%;
+      height:100%;
+      background:#111;
+      border-radius:20px;
+    }
+
+    /* HABITS */
+
+    .habits h3{
+      margin-bottom:20px;
+    }
+
+    .habit{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 0;
+      border-bottom:1px solid #eee;
+    }
+
+    .habit:last-child{
+      border:none;
+    }
+
+    .habit-left{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .habit-icon{
+      width:45px;
+      height:45px;
+      border-radius:14px;
+      background:#f3f3f3;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:#666;
+    }
+
+    .habit-info h4{
+      font-size:15px;
+      color:#222;
+    }
+
+    .habit-info p{
+      font-size:12px;
+      color:#888;
+    }
+
+    .bars{
+      display:flex;
+      gap:4px;
+    }
+
+    .bars span{
+      width:6px;
+      height:20px;
+      background:#ddd;
+      border-radius:10px;
+    }
+
+    .bars span.active{
+      background:#ff875f;
+    }
+
+    @media(max-width:1000px){
+      .dashboard{
+        flex-direction:column;
+      }
+
+      .grid,
+      .bottom{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        flex-direction:row;
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div>
+        <div class="logo">
+          <i class="fa-solid fa-spa"></i> Be.run
+        </div>
+
+        <div class="menu">
+          <div class="icon active">
+            <i class="fa-solid fa-fire"></i>
+          </div>
+
+          <div class="icon">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+
+          <div class="icon">
+            <i class="fa-regular fa-message"></i>
+          </div>
+
+          <div class="icon">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+
+          <div class="icon">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile">
+        <img src="https://i.pravatar.cc/100" alt="">
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <div class="topbar">
+        <div class="welcome">
+          <h1>Hi, Amanda!</h1>
+          <p>Let's take a look at your activity today</p>
+        </div>
+
+        <div class="search-box">
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search for health data">
+          </div>
+
+          <button class="upgrade-btn">Upgrade</button>
+        </div>
+      </div>
+
+      <!-- TOP GRID -->
+      <div class="grid">
+
+        <!-- WORKOUT -->
+        <div class="card workout">
+          <h3>Your Workout Results for Today</h3>
+
+          <div class="bubbles">
+            <div class="bubble bubble1">
+              1,875<br>kcal
+            </div>
+
+            <div class="bubble bubble2">
+              850<br>kcal
+            </div>
+
+            <div class="bubble bubble3">
+              2.30<br>hours
+            </div>
+          </div>
+
+          <div class="legend">
+            <span><div class="dot yellow"></div>Calories intake</span>
+            <span><div class="dot red"></div>Calories burned</span>
+            <span><div class="dot black"></div>Activity time</span>
+          </div>
+        </div>
+
+        <!-- CALENDAR -->
+        <div class="card calendar">
+          <h3>Your Training Days</h3>
+
+          <div class="days">
+            <div>M</div>
+            <div>T</div>
+            <div>W</div>
+            <div>T</div>
+            <div>F</div>
+            <div>S</div>
+            <div>S</div>
+
+            <div class="day"></div>
+            <div class="day active">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day active">5</div>
+            <div class="day">6</div>
+
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+
+            <div class="day done">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day done">17</div>
+            <div class="day">18</div>
+            <div class="day done">19</div>
+            <div class="day">20</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM -->
+      <div class="bottom">
+
+        <div>
+          <div class="card mini-card">
+            <div>
+              <h3>Steps for Today</h3>
+              <p>Keep your body toned</p>
+            </div>
+
+            <div class="steps-circle">
+              8.5k
+            </div>
+          </div>
+
+          <div class="card mini-card" style="margin-top:20px;">
+            <div>
+              <h3>Weight Loss Plan</h3>
+              <p>68% Completed</p>
+            </div>
+
+            <div class="weight-bar">
+              <div class="weight-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HABITS -->
+        <div class="card habits">
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>My Habits</h3>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+
+          <div class="habit">
+            <div class="habit-left">
+              <div class="habit-icon">
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+
+              <div class="habit-info">
+                <h4>Stretching</h4>
+                <p>Sessions completed: 9/12</p>
+              </div>
+            </div>
+
+            <div class="bars">
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="habit">
+            <div class="habit-left">
+              <div class="habit-icon">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+
+              <div class="habit-info">
+                <h4>Yoga Training</h4>
+                <p>Sessions completed: 6/10</p>
+              </div>
+            </div>
+
+            <div class="bars">
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="habit">
+            <div class="habit-left">
+              <div class="habit-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+
+              <div class="habit-info">
+                <h4>Massage</h4>
+                <p>Sessions completed: 4/8</p>
+              </div>
+            </div>
+
+            <div class="bars">
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="habit">
+            <div class="habit-left">
+              <div class="habit-icon">
+                <i class="fa-solid fa-fire"></i>
+              </div>
+
+              <div class="habit-info">
+                <h4>Ab Exercises</h4>
+                <p>Sessions completed: 8/10</p>
+              </div>
+            </div>
+
+            <div class="bars">
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -265,7 +265,7 @@ button { cursor: pointer; }
   width: 100%;
   max-width: 480px;
 }
-.hero-img { border-radius: 3px; overflow: hidden; }
+.hero-img { border-radius: 30px; overflow: hidden; }
 .hero-img--back {
   position: absolute;
   top: -20px; left: -20px;
@@ -290,7 +290,7 @@ button { cursor: pointer; }
   color: rgba(240,237,232,0.5);
   background: rgba(10,10,10,0.7);
   padding: 4px 8px;
-  border-radius: 2px;
+  border-radius: 20px;
 }
 .hero-stat-block {
   display: flex;
@@ -303,15 +303,17 @@ button { cursor: pointer; }
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.8rem;
   line-height: 1;
-  color: #f0ede8;
+  color: #ffffff;
   letter-spacing: 0.05em;
+  align-self: center;
 }
 .stat-l {
   font-size: 0.72rem;
-  color: rgba(240,237,232,0.35);
+  color: #ffffff;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-top: 4px;
+  align-self: center;
 }
 .hero-scroll-hint {
   grid-column: 1;
@@ -404,7 +406,7 @@ button { cursor: pointer; }
 .work-desc {
   font-size: 0.9rem;
   font-weight: 300;
-  color: rgba(240,237,232,0.45);
+  color: rgba(161, 161, 161, 0.45);
   line-height: 1.7;
   max-width: 320px;
   align-self: end;
@@ -412,16 +414,18 @@ button { cursor: pointer; }
 .work-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  background: rgba(240,237,232,0.06);
+  gap: 20px;
+  background: transparent;
+  border-radius: 30px;
 }
-.work-item { background: #0a0a0a; }
-.work-item--large { grid-column: span 2; }
-.work-item--wide { grid-column: span 2; }
-.work-item-inner { display: block; }
+.work-item { background: #0a0a0a; border-radius: 30px;}
+.work-item--large { grid-column: span 2; border-radius: 30px;}
+.work-item--wide { grid-column: span 2; border-radius: 30px;}
+.work-item-inner { display: block; border-radius: 30px; overflow: hidden; }
 .work-img {
   position: relative;
   overflow: hidden;
+  border-radius: 30px;
 }
 .work-item--large .work-img { height: 420px; }
 .work-item--wide .work-img { height: 300px; }
@@ -444,8 +448,7 @@ button { cursor: pointer; }
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: #f0ede8;
-  border-bottom: 1px solid rgba(240,237,232,0.5);
+
   padding-bottom: 2px;
 }
 .work-item:hover .work-img-overlay { opacity: 1; }
@@ -454,20 +457,17 @@ button { cursor: pointer; }
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px 24px;
-  border-top: 1px solid rgba(240,237,232,0.06);
   gap: 16px;
 }
 .work-meta-left h3 {
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  color: #f0ede8;
   margin-bottom: 4px;
 }
 .work-meta-left p {
   font-size: 0.8rem;
   font-weight: 300;
-  color: rgba(240,237,232,0.4);
   line-height: 1.5;
   max-width: 280px;
 }
@@ -483,10 +483,8 @@ button { cursor: pointer; }
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(240,237,232,0.3);
-  border: 1px solid rgba(240,237,232,0.12);
   padding: 3px 8px;
-  border-radius: 2px;
+  border-radius: 20px;
 }
 .work-price {
   font-family: 'Bebas Neue', sans-serif;
@@ -522,7 +520,7 @@ button { cursor: pointer; }
 .about-img-wrap {
   position: relative;
   height: 360px;
-  border-radius: 3px;
+  border-radius: 30px;
   overflow: hidden;
 }
 .about-img-caption {
@@ -591,12 +589,12 @@ button { cursor: pointer; }
   animation: stripScroll 40s linear infinite;
 }
 .strip-item {
-  width: 320px;
-  height: 200px;
-  flex-shrink: 0;
-  border-radius: 3px;
+  position: relative;
+  width: 200px;
+  height: 180px;
+  border: 1px solid rgba(240,237,232,0.08);
+  border-radius: 30px;
   overflow: hidden;
-  border: 1px solid rgba(240,237,232,0.06);
   transition: border-color 0.3s;
 }
 .strip-item:hover { border-color: rgba(240,237,232,0.2); }
@@ -727,7 +725,10 @@ button { cursor: pointer; }
   letter-spacing: 0.04em;
   border-radius: 2px;
   transition: all 0.25s;
+  margin-top: auto;
+  margin-bottom: -8px;
 }
+
 .pricing-btn--outline {
   border: 1px solid rgba(240,237,232,0.2);
   color: rgba(240,237,232,0.7);
@@ -776,7 +777,7 @@ button { cursor: pointer; }
 .closing-title em { font-style: italic; color: rgba(240,237,232,0.4); }
 .closing-img {
   height: 400px;
-  border-radius: 3px;
+  border-radius: 30px;
   overflow: hidden;
   border: 1px solid rgba(240,237,232,0.06);
 }

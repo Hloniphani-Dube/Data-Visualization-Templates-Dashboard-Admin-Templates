@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Dashboard UI</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#000;
+      font-family:Inter, sans-serif;
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:40px;
+    }
+
+    .dashboard{
+      width:1100px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+    }
+
+    .left,
+    .right{
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+    }
+
+    .top-left{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+    }
+
+    .card{
+      border-radius:28px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* =========================
+       PROGRESS CARD
+    ========================== */
+
+    .progress-card{
+      background:#c9f542;
+      color:#111;
+      padding:20px;
+      height:220px;
+    }
+
+    .tag{
+      position:absolute;
+      top:18px;
+      right:18px;
+      background:#222;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:11px;
+    }
+
+    .title{
+      font-size:15px;
+      font-weight:600;
+      margin-bottom:45px;
+    }
+
+    .big-number{
+      font-size:68px;
+      font-weight:700;
+      line-height:1;
+      letter-spacing:-3px;
+    }
+
+    .sub{
+      margin-top:8px;
+      font-size:13px;
+      opacity:.7;
+    }
+
+    /* =========================
+       DEVICE CARD
+    ========================== */
+
+    .device-card{
+      background:#1d1d1d;
+      padding:20px;
+      height:220px;
+    }
+
+    .device-card .title{
+      color:#d2ff44;
+      margin-bottom:18px;
+    }
+
+    .dots{
+      position:absolute;
+      right:18px;
+      top:18px;
+      width:22px;
+      height:22px;
+      background:#d2ff44;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#111;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .device-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .device-item{
+      display:flex;
+      justify-content:space-between;
+      color:#7d7d7d;
+      font-size:15px;
+    }
+
+    /* =========================
+       PERFORMANCE CARD
+    ========================== */
+
+    .performance-card{
+      background:#f3f3f3;
+      color:#111;
+      padding:22px;
+      height:220px;
+    }
+
+    .performance-card .title{
+      margin-bottom:0;
+    }
+
+    .small{
+      font-size:11px;
+      color:#777;
+      margin-top:4px;
+    }
+
+    .count{
+      position:absolute;
+      right:24px;
+      top:18px;
+      font-size:58px;
+      font-weight:700;
+      color:#444;
+      letter-spacing:-3px;
+    }
+
+    .bars{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      height:95px;
+      display:flex;
+      gap:6px;
+      align-items:flex-end;
+      background:#dfe4ef;
+      border-radius:18px;
+      padding:10px;
+    }
+
+    .bars span{
+      flex:1;
+      background:#94afe9;
+      border-radius:12px;
+      height:100%;
+    }
+
+    .bars span:last-child{
+      max-width:10px;
+      background:#fff;
+      height:70%;
+      margin-left:auto;
+    }
+
+    /* =========================
+       LINE GRAPH CARD
+    ========================== */
+
+    .line-card{
+      background:#1d1d1d;
+      height:260px;
+      padding:22px;
+    }
+
+    .line-card .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      margin-bottom:10px;
+    }
+
+    .line-card .count{
+      position:static;
+      color:#fff;
+      font-size:28px;
+    }
+
+    .graph{
+      position:absolute;
+      left:20px;
+      right:20px;
+      bottom:20px;
+      height:150px;
+    }
+
+    .graph svg{
+      width:100%;
+      height:100%;
+    }
+
+    .months{
+      position:absolute;
+      left:40px;
+      right:40px;
+      bottom:12px;
+      display:flex;
+      justify-content:space-between;
+      color:#fff;
+      font-size:13px;
+      opacity:.7;
+    }
+
+    /* =========================
+       BALANCE CARD
+    ========================== */
+
+    .balance-card{
+      background:#efe07c;
+      color:#111;
+      height:260px;
+      padding:22px;
+    }
+
+    .dropdown{
+      position:absolute;
+      right:20px;
+      top:18px;
+      background:#111;
+      color:#fff;
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+    }
+
+    .gauge{
+      position:absolute;
+      width:320px;
+      height:160px;
+      border:18px solid #111;
+      border-bottom:none;
+      border-radius:320px 320px 0 0;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:18px;
+      clip-path:inset(0 0 50% 0);
+      opacity:.95;
+    }
+
+    .gauge::after{
+      content:"78%";
+      position:absolute;
+      left:50%;
+      top:70px;
+      transform:translateX(-50%);
+      font-size:64px;
+      font-weight:700;
+      border:none;
+    }
+
+    /* =========================
+       ORANGE ANALYTICS CARD
+    ========================== */
+
+    .orange-card{
+      background:#ff7638;
+      color:#111;
+      padding:24px;
+      height:548px;
+    }
+
+    .orange-card h2{
+      font-size:62px;
+      line-height:1;
+      letter-spacing:-3px;
+      margin-top:6px;
+    }
+
+    .week{
+      position:absolute;
+      right:22px;
+      top:22px;
+      background:#222;
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    .bar-chart{
+      position:absolute;
+      left:40px;
+      right:40px;
+      bottom:34px;
+      top:140px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+    }
+
+    .column{
+      width:44px;
+      height:100%;
+      background:rgba(0,0,0,.18);
+      border-radius:22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .fill{
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      background:#222;
+      border-radius:22px;
+    }
+
+    .day{
+      position:absolute;
+      bottom:-30px;
+      width:100%;
+      text-align:center;
+      font-size:13px;
+      color:#111;
+    }
+
+    @media(max-width:1000px){
+
+      .dashboard{
+        grid-template-columns:1fr;
+      }
+
+      .top-left{
+        grid-template-columns:1fr;
+      }
+
+      .orange-card{
+        height:500px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <section class="dashboard">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+      <div class="top-left">
+
+        <!-- Progress -->
+        <div class="card progress-card">
+          <div class="title">PROGRESS</div>
+          <div class="tag">+0.12(+0.23%)</div>
+
+          <div class="big-number">↑78%</div>
+          <div class="sub">Current Situation</div>
+        </div>
+
+        <!-- Device -->
+        <div class="card device-card">
+          <div class="title">DEVICE TYPE</div>
+          <div class="dots">•••</div>
+
+          <div class="device-list">
+            <div class="device-item"><span>Desktop</span><span>20%</span></div>
+            <div class="device-item"><span>Laptop</span><span>15%</span></div>
+            <div class="device-item"><span>Tablet</span><span>10%</span></div>
+            <div class="device-item"><span>Smart TV</span><span>10%</span></div>
+            <div class="device-item"><span>Playstation</span><span>20%</span></div>
+            <div class="device-item"><span>XBOX</span><span>15%</span></div>
+            <div class="device-item"><span>Smart Watch</span><span>10%</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Line Analytics -->
+      <div class="card line-card">
+
+        <div class="top">
+          <div class="title">ANALYTICS</div>
+          <div class="count">4K+</div>
+        </div>
+
+        <div class="graph">
+          <svg viewBox="0 0 600 180" fill="none">
+            <path
+              d="M20 90 
+              C80 10, 140 120, 220 90
+              S340 20, 420 40
+              S520 170, 580 120"
+              stroke="#c9f542"
+              stroke-width="6"
+              fill="none"
+              stroke-linecap="round"
+            />
+
+            <circle cx="80" cy="58" r="8" fill="#c9f542"/>
+            <circle cx="220" cy="90" r="8" fill="#c9f542"/>
+            <circle cx="420" cy="40" r="8" fill="#c9f542"/>
+            <circle cx="580" cy="120" r="8" fill="#c9f542"/>
+          </svg>
+        </div>
+
+        <div class="months">
+          <span>Jan-Mar</span>
+          <span>Apr-Jun</span>
+          <span>Jul-Sep</span>
+          <span>Oct-Dec</span>
+        </div>
+
+      </div>
+
+      <!-- Balance -->
+      <div class="card balance-card">
+        <div class="title">BALANCE</div>
+        <div class="dropdown">This Month ▼</div>
+
+        <div class="gauge"></div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+      <!-- Performance -->
+      <div class="card performance-card">
+
+        <div class="title">PERFORMANCE</div>
+        <div class="small">In the past 7 days</div>
+
+        <div class="count">+58k</div>
+
+        <div class="bars">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+
+      <!-- Orange Analytics -->
+      <div class="card orange-card">
+
+        <div class="title">ANALYTICS</div>
+        <h2>5K+</h2>
+
+        <div class="week">This Week ▼</div>
+
+        <div class="bar-chart">
+
+          <div class="column">
+            <div class="fill" style="height:30%;"></div>
+            <div class="day">Sat</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:18%;"></div>
+            <div class="day">Sun</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:55%;"></div>
+            <div class="day">Mon</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:32%;"></div>
+            <div class="day">Tue</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:82%;"></div>
+            <div class="day">Wed</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:45%;"></div>
+            <div class="day">Thu</div>
+          </div>
+
+          <div class="column">
+            <div class="fill" style="height:60%;"></div>
+            <div class="day">Fri</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>

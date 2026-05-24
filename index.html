@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FORMA — Data Visualization Templates</title>
+  <title>Data Visualization Templates</title>
   <meta name="description" content="Premium dashboard and data visualization templates. Crafted for builders who care about craft." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,6 @@
        progress, then fades out to reveal the main content. -->
   <div id="loader" aria-hidden="true" role="presentation">
     <div class="loader-inner">
-      <span class="loader-word" id="loaderWord">FORMA</span>
       <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
       <span class="loader-count" id="loaderCount">0</span>
     </div>
@@ -26,7 +25,6 @@
   <!-- Fixed top navigation bar. This includes the desktop links, CTA, and a mobile
        hamburger button that toggles a drawer menu for smaller screens. -->
   <header class="nav" id="nav" role="banner">
-    <a href="#" class="nav-logo" aria-label="FORMA home">FORMA</a>
     <nav aria-label="Primary navigation">
       <ul class="nav-links" role="list">
         <li><a href="#work">Work</a></li>
@@ -34,7 +32,6 @@
         <li><a href="#pricing">Pricing</a></li>
       </ul>
     </nav>
-    <a href="#pricing" class="nav-cta" aria-label="Get access to templates">Get access →</a>
     <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span>
     </button>
@@ -45,7 +42,6 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#pricing">Get access →</a></li>
     </ul>
   </div>
 
@@ -57,7 +53,6 @@
          right image/stat column to create a strong balance on large screens. -->
     <section class="hero" id="hero" aria-labelledby="heroTitle">
       <div class="hero-left">
-        <p class="hero-eyebrow" aria-label="Category">Dashboard &amp; Data Visualization</p>
         <h1 id="heroTitle" class="hero-title">
           <span class="title-line" data-text="DATA">DATA</span>
           <span class="title-line title-line--indent" data-text="MADE">MADE</span>
@@ -65,33 +60,15 @@
         </h1>
         <div class="hero-body">
           <p>Templates that don't look like templates. Built for products that take design seriously.</p>
-          <a href="#work" class="btn-text">Explore the collection <span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="hero-right" aria-hidden="true">
         <div class="hero-img-stack">
-          <div class="hero-img hero-img--back">
-            <img src="assets/img_1.jpg" alt="" />
-          </div>
           <div class="hero-img hero-img--front">
             <img src="assets/img_2.jpg" alt="" />
-            <div class="hero-img-label">Analytics Pro — 2025</div>
+            <div class="hero-img-label">Pro</div>
           </div>
         </div>
-        <div class="hero-stat-block">
-          <div class="hero-stat">
-            <span class="stat-n">48</span>
-            <span class="stat-l">Templates</span>
-          </div>
-          <div class="hero-stat">
-            <span class="stat-n">12k</span>
-            <span class="stat-l">Builders</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
       </div>
     </section>
 
@@ -129,10 +106,10 @@
 
       <div class="work-grid">
 
-        <article class="work-item work-item--large" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="Analytics Pro template — $49">
+        <article class="work-item" data-reveal>
+          <a href="UIcards1.html" class="work-item-inner">
             <div class="work-img">
-              <img src="assets/img_2.jpg" alt="Analytics Pro dashboard showing charts and KPI metrics" loading="lazy" />
+              <img src="assets/img_2.jpg" alt="work.html" loading="lazy" />
               <div class="work-img-overlay" aria-hidden="true">
                 <span>View template →</span>
               </div>
@@ -142,16 +119,12 @@
                 <h3>Analytics Pro</h3>
                 <p>Full analytics suite. Real-time charts, KPI widgets, dark-first.</p>
               </div>
-              <div class="work-meta-right">
-                <span class="work-tag">Dashboard</span>
-                <span class="work-price">$49</span>
-              </div>
             </div>
           </a>
         </article>
 
         <article class="work-item" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="Admin Suite template — $59">
+          <a href="UIcards2.html" class="work-item-inner">
             <div class="work-img">
               <img src="assets/img_1.jpg" alt="Admin Suite panel with user management and data tables" loading="lazy" />
               <div class="work-img-overlay" aria-hidden="true"><span>View →</span></div>
@@ -161,16 +134,12 @@
                 <h3>Admin Suite</h3>
                 <p>Complete admin panel. Tables, forms, user management.</p>
               </div>
-              <div class="work-meta-right">
-                <span class="work-tag">Admin</span>
-                <span class="work-price">$59</span>
-              </div>
             </div>
           </a>
         </article>
 
         <article class="work-item" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="DataFlow template — $69">
+          <a href="UIcards3.html" class="work-item-inner">
             <div class="work-img">
               <img src="assets/img_3.jpg" alt="DataFlow visualization template with advanced chart components" loading="lazy" />
               <div class="work-img-overlay" aria-hidden="true"><span>View →</span></div>
@@ -180,16 +149,12 @@
                 <h3>DataFlow</h3>
                 <p>Visualization-first. Advanced charts, filters, drill-downs.</p>
               </div>
-              <div class="work-meta-right">
-                <span class="work-tag">Analytics</span>
-                <span class="work-price">$69</span>
-              </div>
             </div>
           </a>
         </article>
 
-        <article class="work-item work-item--wide" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="FinanceOS template — $79">
+        <article class="work-item" data-reveal>
+          <a href="UIcards4.html" class="work-item-inner">
             <div class="work-img">
               <img src="assets/img_4.jpg" alt="FinanceOS financial dashboard with portfolio and P&L charts" loading="lazy" />
               <div class="work-img-overlay" aria-hidden="true"><span>View template →</span></div>
@@ -199,52 +164,9 @@
                 <h3>FinanceOS</h3>
                 <p>Portfolio tracking, P&amp;L charts, transaction tables. Built for finance products.</p>
               </div>
-              <div class="work-meta-right">
-                <span class="work-tag">Finance</span>
-                <span class="work-price">$79</span>
-              </div>
             </div>
           </a>
         </article>
-
-        <article class="work-item" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="CRM Dashboard template — $59">
-            <div class="work-img">
-              <img src="assets/img_5.jpg" alt="CRM Dashboard with pipeline views and contact management" loading="lazy" />
-              <div class="work-img-overlay" aria-hidden="true"><span>View →</span></div>
-            </div>
-            <div class="work-meta">
-              <div class="work-meta-left">
-                <h3>CRM Dashboard</h3>
-                <p>Pipeline views, contact management, deal tracking.</p>
-              </div>
-              <div class="work-meta-right">
-                <span class="work-tag">CRM</span>
-                <span class="work-price">$59</span>
-              </div>
-            </div>
-          </a>
-        </article>
-
-        <article class="work-item" data-reveal>
-          <a href="#pricing" class="work-item-inner" aria-label="SaaS Control template — $69">
-            <div class="work-img">
-              <img src="assets/img_1.jpg" alt="SaaS Control panel with subscription management" loading="lazy" />
-              <div class="work-img-overlay" aria-hidden="true"><span>View →</span></div>
-            </div>
-            <div class="work-meta">
-              <div class="work-meta-left">
-                <h3>SaaS Control</h3>
-                <p>Subscription management, usage analytics, billing UI.</p>
-              </div>
-              <div class="work-meta-right">
-                <span class="work-tag">SaaS</span>
-                <span class="work-price">$69</span>
-              </div>
-            </div>
-          </a>
-        </article>
-
       </div>
     </section>
 
@@ -255,11 +177,11 @@
       <div class="about-inner">
         <div class="about-left" data-reveal>
           <span class="section-index" aria-hidden="true">02</span>
-          <h2 id="aboutTitle">Why<br /><em>FORMA</em></h2>
+          <h2 id="aboutTitle">Why<br /><em>These Templates</em></h2>
         </div>
         <div class="about-right">
           <div class="about-img-wrap" data-reveal>
-            <img src="assets/img_3.jpg" alt="Dark dashboard UI showing the quality of FORMA templates" loading="lazy" />
+            <img src="assets/img_8.jpg" alt="Dark dashboard UI showing the quality of FORMA templates" loading="lazy" />
             <div class="about-img-caption" aria-hidden="true">
               <span class="mono">v2.0 — 2025</span>
             </div>
@@ -301,87 +223,129 @@
          a dynamic showcase without requiring user interaction. -->
     <section class="strip" aria-label="Template showcase images">
       <div class="strip-track" id="stripTrack" aria-hidden="true">
-        <div class="strip-item"><img src="assets/img_2.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_5.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_1.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_4.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_2.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_5.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_1.jpg" alt="" /></div>
-        <div class="strip-item"><img src="assets/img_4.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_1.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_2.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_3.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_4.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_5.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_6.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_7.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_1.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_2.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_3.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_4.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_5.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_6.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_7.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_1.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_2.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_3.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_4.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_5.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_6.jpg" alt="" /></div>
+        <div class="strip-item"><img src="assets/img_spin_7.jpg" alt="" /></div>
       </div>
     </section>
 
     <!-- PRICING -->
     <!-- Pricing cards compare different purchase options. The featured card stands out using
          a stronger background color and bolder text treatment. -->
-    <section class="pricing" id="pricing" aria-labelledby="pricingTitle">
-      <div class="pricing-header" data-reveal>
-        <span class="section-index" aria-hidden="true">03</span>
-        <h2 id="pricingTitle">One price.<br /><em>Everything included.</em></h2>
-        <p>No subscriptions. No tiers that hold features hostage. Buy once, own it.</p>
+
+         <section class="pricing" id="pricing" aria-labelledby="pricingTitle">
+  <div class="pricing-header" data-reveal>
+    <span class="section-index" aria-hidden="true">03</span>
+    <h2 id="pricingTitle">
+      Simple pricing.<br />
+      <em>Built for South Africa.</em>
+    </h2>
+    <p>
+      Affordable once-off pricing in South African Rands. 
+      No monthly subscriptions. Pay once and own it forever.
+    </p>
+  </div>
+
+  <div class="pricing-cards">
+
+    <!-- Starter Plan -->
+    <div class="pricing-card" data-reveal>
+      <div class="pricing-card-top">
+        <h3>Starter</h3>
+
+        <div class="pricing-num">
+          <span>R399</span>
+          <small>once-off payment</small>
+        </div>
       </div>
 
-      <div class="pricing-cards">
+      <ul class="pricing-list" role="list">
+        <li>3 premium website templates</li>
+        <li>Mobile responsive design</li>
+        <li>Fast loading performance</li>
+        <li>Basic customization</li>
+        <li>3 months support</li>
+        <li>custom branding assets</li>
+      </ul>
 
-        <div class="pricing-card" data-reveal>
-          <div class="pricing-card-top">
-            <h3>Starter</h3>
-            <div class="pricing-num">
-              <span>$49</span>
-              <small>one-time</small>
-            </div>
-          </div>
-          <ul class="pricing-list" role="list">
-            <li>3 dashboard templates</li>
-            <li>Dark &amp; light mode</li>
-            <li>Responsive layouts</li>
-            <li>6 months of updates</li>
-            <li>Community support</li>
-          </ul>
-          <a href="#" class="pricing-btn pricing-btn--outline">Get Starter</a>
+      <a href="#" class="pricing-btn pricing-btn--outline">
+        Get Starter
+      </a>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="pricing-card pricing-card--featured" data-reveal>
+      <div class="pricing-card-top">
+        <h3>
+          Pro
+          <span class="pricing-badge">Most Popular</span>
+        </h3>
+
+        <div class="pricing-num">
+          <span>R999</span>
+          <small>once-off payment</small>
         </div>
-
-        <div class="pricing-card pricing-card--featured" data-reveal>
-          <div class="pricing-card-top">
-            <h3>Pro <span class="pricing-badge">Most popular</span></h3>
-            <div class="pricing-num">
-              <span>$99</span>
-              <small>one-time</small>
-            </div>
-          </div>
-          <ul class="pricing-list" role="list">
-            <li>All 48+ templates</li>
-            <li>Dark &amp; light mode</li>
-            <li>Responsive layouts</li>
-            <li>Lifetime updates</li>
-            <li>Priority support</li>
-            <li>Figma source files</li>
-          </ul>
-          <a href="#" class="pricing-btn pricing-btn--fill">Get Pro</a>
-        </div>
-
-        <div class="pricing-card" data-reveal>
-          <div class="pricing-card-top">
-            <h3>Team</h3>
-            <div class="pricing-num">
-              <span>$199</span>
-              <small>one-time</small>
-            </div>
-          </div>
-          <ul class="pricing-list" role="list">
-            <li>Everything in Pro</li>
-            <li>Up to 10 developers</li>
-            <li>White-label license</li>
-            <li>Lifetime updates</li>
-            <li>Dedicated support</li>
-            <li>Custom branding kit</li>
-          </ul>
-          <a href="#" class="pricing-btn pricing-btn--outline">Get Team</a>
-        </div>
-
       </div>
-    </section>
+
+      <ul class="pricing-list" role="list">
+        <li>All premium templates included</li>
+        <li>Modern UI & animations</li>
+        <li>Fully responsive layouts</li>
+        <li>Lifetime updates</li>
+        <li>Priority support</li>
+        <li>Figma source files</li>
+      </ul>
+
+      <a href="#" class="pricing-btn pricing-btn--fill">
+        Get Pro
+      </a>
+    </div>
+
+    <!-- Agency Plan -->
+    <div class="pricing-card" data-reveal>
+      <div class="pricing-card-top">
+        <h3>Agency</h3>
+
+        <div class="pricing-num">
+          <span>R1 499</span>
+          <small>once-off payment</small>
+        </div>
+      </div>
+
+      <ul class="pricing-list" role="list">
+        <li>Everything in Pro</li>
+        <li>Unlimited client projects</li>
+        <li>Commercial usage license</li>
+        <li>White-label rights</li>
+        <li>Dedicated support</li>
+        <li>Custom branding assets</li>
+      </ul>
+
+      <a href="#" class="pricing-btn pricing-btn--outline">
+        Get Agency
+      </a>
+    </div>
+
+  </div>
+</section>
 
     <!-- CLOSING STATEMENT -->
     <!-- Final call-to-action section with supporting headline and image. This closes the page
@@ -393,10 +357,10 @@
           Stop shipping<br />
           <em>ugly dashboards.</em>
         </h2>
-        <a href="#pricing" class="btn-text btn-text--large">Start with FORMA <span aria-hidden="true">→</span></a>
+        <a href="#pricing" class="btn-text btn-text--large">Start Now <span aria-hidden="true">→</span></a>
       </div>
       <div class="closing-img" aria-hidden="true" data-reveal>
-        <img src="assets/img_5.jpg" alt="" />
+        <img src="assets/img_off_1.jpg" alt="" />
       </div>
     </section>
 
@@ -408,7 +372,7 @@
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-logo">FORMA</span>
+        <span class="footer-logo"></span>
         <p>Premium dashboard &amp; data visualization templates.</p>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
@@ -418,7 +382,7 @@
         <a href="#">Docs</a>
         <a href="#">License</a>
       </nav>
-      <p class="footer-copy">© 2025 FORMA</p>
+      <p class="footer-copy">© 2025</p>
     </div>
   </footer>
 
