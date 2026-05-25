@@ -3,698 +3,721 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Finance Dashboard UI</title>
+  <title>Finance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    :root{
+      --bg:#0e1117;
+      --card-bg:#161b24;
+      --card-alt:#1e2533;
+      --lime:#c9f170;
+      --lime-dim:#8fad3e;
+      --teal:#30c4aa;
+      --purple:#9d84ff;
+      --amber:#f0c060;
+      --text:#f0f0ec;
+      --muted:#8a8f9e;
+      --border:rgba(255,255,255,0.07);
+      --radius:22px;
+      --radius-sm:14px;
     }
 
     body{
-      background:#2d6f5e;
-      font-family:Inter, sans-serif;
+      background:var(--bg);
+      font-family:'DM Sans',sans-serif;
       min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:40px;
-      color:#111;
+      padding:24px;
+      color:var(--text);
     }
 
-    .dashboard{
-      width:1100px;
+    .grid{
       display:grid;
-      grid-template-columns:1.1fr .55fr 1fr;
-      gap:18px;
+      grid-template-columns:1.15fr 0.6fr 1fr;
+      gap:14px;
+      max-width:1120px;
+      margin:0 auto;
     }
 
-    .column{
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
+    .col{display:flex;flex-direction:column;gap:14px;}
 
     .card{
-      border-radius:34px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
       position:relative;
       overflow:hidden;
+      animation:fadeUp .5s ease both;
     }
 
-    /* =========================
-       LEFT BIG CARD
-    ========================== */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(16px);}
+      to{opacity:1;transform:translateY(0);}
+    }
 
+    .card:nth-child(1){animation-delay:.05s;}
+    .card:nth-child(2){animation-delay:.1s;}
+    .card:nth-child(3){animation-delay:.15s;}
+
+    /* EXPENSES */
     .expenses{
-      background:#13171b;
-      color:#fff;
-      padding:26px;
-      min-height:680px;
+      background:var(--card-bg);
+      padding:28px;
     }
 
     .pill{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      padding:9px 18px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:600;
-      background:#d8f36c;
+      gap:6px;
+      background:var(--lime);
       color:#111;
-    }
-
-    .subtitle{
-      margin-top:18px;
-      font-size:16px;
-      color:#e9e9e9;
-    }
-
-    .circle-wrap{
-      width:340px;
-      height:340px;
-      margin:55px auto 35px;
-      position:relative;
-    }
-
-    .circle-wrap svg{
-      width:100%;
-      height:100%;
-      transform:rotate(-90deg);
-    }
-
-    .circle-wrap .center{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:92px;
+      font-size:11px;
       font-weight:700;
-      letter-spacing:-5px;
-      color:#f3f3f3;
-    }
-
-    .legend{
-      margin-top:20px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-
-    .legend-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:18px;
-    }
-
-    .legend-left{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-    }
-
-    .teal{ background:#34c2b3; }
-    .purple{ background:#8d73f6; }
-    .lime{ background:#d8f36c; }
-    .orange{ background:#f3ca7a; }
-
-    /* =========================
-       CENTER COLUMN
-    ========================== */
-
-    .balance-card{
-      background:#d8f36c;
-      padding:22px;
-      min-height:225px;
-    }
-
-    .icon{
-      width:44px;
-      height:44px;
-      border-radius:50%;
-      background:#111;
-      color:#d8f36c;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:26px;
-      font-weight:700;
-    }
-
-    .percent{
-      position:absolute;
-      top:24px;
-      right:24px;
-      font-size:18px;
-      font-weight:600;
-    }
-
-    .money{
-      font-size:70px;
-      font-weight:700;
-      margin-top:45px;
-      letter-spacing:-3px;
-    }
-
-    .small{
-      font-size:16px;
-      margin-top:6px;
-      opacity:.8;
-    }
-
-    /* ========================= */
-
-    .progress-card{
-      background:#ececec;
-      padding:24px;
-      min-height:200px;
-    }
-
-    .progress-title{
-      font-size:16px;
-      margin-bottom:26px;
-    }
-
-    .progress-value{
-      font-size:64px;
-      font-weight:700;
-      letter-spacing:-3px;
-    }
-
-    .green-pill{
-      position:absolute;
-      left:22px;
-      bottom:20px;
-      background:#55b69f;
-      color:#fff;
-      padding:10px 16px;
+      letter-spacing:.08em;
+      padding:7px 14px;
       border-radius:999px;
-      font-size:15px;
-      font-weight:600;
-    }
-
-    /* ========================= */
-
-    .subs-card{
-      background:#8973eb;
-      color:#fff;
-      padding:22px;
-      min-height:235px;
-    }
-
-    .mini{
-      font-size:14px;
-      opacity:.8;
       text-transform:uppercase;
     }
 
-    .subs{
-      font-size:52px;
+    .pill-dot{width:6px;height:6px;border-radius:50%;background:#111;}
+
+    .section-label{
+      margin-top:16px;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:400;
+      letter-spacing:.02em;
+    }
+
+    .donut-wrap{
+      position:relative;
+      width:220px;
+      height:220px;
+      margin:32px auto 28px;
+    }
+
+    .donut-wrap svg{transform:rotate(-90deg);width:100%;height:100%;}
+
+    .donut-center{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .donut-amount{
+      font-size:44px;
       font-weight:700;
+      letter-spacing:-2px;
+      line-height:1;
+    }
+
+    .donut-sub{font-size:12px;color:var(--muted);margin-top:4px;}
+
+    .legend{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+
+    .legend-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .legend-left{display:flex;align-items:center;gap:10px;}
+
+    .legend-bar-wrap{
+      flex:1;
+      margin:0 14px;
+      height:3px;
+      background:rgba(255,255,255,0.08);
+      border-radius:2px;
+      overflow:hidden;
+    }
+
+    .legend-bar{
+      height:100%;
+      border-radius:2px;
+      width:0%;
+      transition:width .8s cubic-bezier(.4,0,0,1);
+    }
+
+    .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+    .legend-name{font-size:14px;color:var(--muted);}
+    .legend-pct{font-size:14px;font-weight:600;min-width:36px;text-align:right;}
+
+    /* BALANCE */
+    .balance{
+      background:var(--lime);
+      color:#111;
+      padding:24px;
+      min-height:210px;
+    }
+
+    .bal-icon{
+      width:40px;height:40px;border-radius:50%;
+      background:#111;
+      display:flex;align-items:center;justify-content:center;
+    }
+
+    .bal-amount{
+      font-size:58px;
+      font-weight:700;
+      letter-spacing:-3px;
+      line-height:1;
+      margin-top:28px;
+    }
+
+    .bal-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       margin-top:8px;
     }
 
-    .price{
-      font-size:70px;
-      font-weight:700;
-      margin-top:20px;
-      letter-spacing:-3px;
-    }
+    .bal-label{font-size:13px;opacity:.65;}
 
-    .bottom-text{
-      position:absolute;
-      left:22px;
-      bottom:22px;
-      font-size:15px;
-      line-height:1.5;
-      opacity:.9;
-    }
-
-    /* =========================
-       RIGHT TOP
-    ========================== */
-
-    .performance-card{
-      background:#13171b;
-      color:#fff;
-      padding:24px;
-      min-height:405px;
-    }
-
-    .orange-pill{
-      background:#f3ca7a;
-      color:#111;
-      padding:9px 16px;
-      border-radius:999px;
+    .badge-up{
+      background:#111;
+      color:var(--lime);
       font-size:12px;
       font-weight:600;
+      padding:5px 10px;
+      border-radius:999px;
+    }
+
+    /* PROGRESS */
+    .progress-card{
+      background:var(--card-alt);
+      padding:24px;
+    }
+
+    .prog-label{font-size:13px;color:var(--muted);}
+    .prog-value{
+      font-size:52px;
+      font-weight:700;
+      letter-spacing:-2px;
+      margin:8px 0 16px;
+      color:var(--text);
+    }
+
+    .track{
+      width:100%;height:6px;
+      background:rgba(255,255,255,0.08);
+      border-radius:3px;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+
+    .fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--teal),var(--lime));
+      border-radius:3px;
+      width:0%;
+      transition:width 1s cubic-bezier(.4,0,0,1);
+    }
+
+    .prog-badge{
+      background:rgba(48,196,170,.15);
+      color:var(--teal);
+      font-size:12px;
+      font-weight:600;
+      padding:5px 12px;
+      border-radius:999px;
       display:inline-block;
     }
 
-    .performance-number{
-      font-size:82px;
+    /* SUBS */
+    .subs-card{
+      background:#4a3fcf;
+      padding:24px;
+      flex:1;
+    }
+
+    .subs-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .subs-micro{
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      opacity:.65;
+    }
+
+    .subs-count{
+      font-size:42px;
       font-weight:700;
-      letter-spacing:-5px;
-      margin-top:18px;
+      letter-spacing:-2px;
+      margin:6px 0 0;
     }
 
-    .performance-sub{
-      font-size:18px;
-      opacity:.9;
-      margin-top:4px;
+    .subs-divider{
+      height:1px;
+      background:rgba(255,255,255,.12);
+      margin:18px 0;
     }
 
-    .bars{
-      position:absolute;
-      left:22px;
-      right:22px;
-      bottom:48px;
-      height:220px;
+    .subs-price{
+      font-size:50px;
+      font-weight:700;
+      letter-spacing:-3px;
+      line-height:1;
+    }
+
+    .subs-next{
+      margin-top:14px;
+      font-size:12px;
+      opacity:.7;
+      line-height:1.7;
+    }
+
+    .subs-next strong{opacity:1;font-weight:600;}
+
+    /* PERFORMANCE */
+    .performance{
+      background:var(--card-bg);
+      padding:26px;
+      min-height:390px;
+    }
+
+    .perf-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      margin-bottom:4px;
+    }
+
+    .perf-pill{
+      background:rgba(240,192,96,.15);
+      color:var(--amber);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.08em;
+      padding:6px 12px;
+      border-radius:999px;
+      text-transform:uppercase;
+    }
+
+    .perf-number{
+      font-size:72px;
+      font-weight:700;
+      letter-spacing:-4px;
+      color:var(--lime);
+      line-height:1;
+      margin-top:10px;
+    }
+
+    .perf-sub{font-size:13px;color:var(--muted);margin-top:4px;margin-bottom:20px;}
+
+    .bars-wrap{
       display:flex;
       align-items:flex-end;
-      gap:12px;
+      gap:8px;
+      height:175px;
     }
 
     .bar{
       flex:1;
-      background:#8d73f6;
-      border-radius:12px 12px 8px 8px;
+      border-radius:10px 10px 6px 6px;
+      background:rgba(157,132,255,.25);
       position:relative;
+      height:0px;
+      cursor:pointer;
+      transition:background .2s;
     }
 
-    .bar::before{
-      content:"";
+    .bar:hover{background:rgba(157,132,255,.45);}
+
+    .bar-top{
       position:absolute;
-      top:0;
-      left:0;
-      right:0;
-      height:8px;
-      background:#d8f36c;
-      border-radius:12px 12px 0 0;
+      top:0;left:0;right:0;
+      height:6px;
+      background:var(--purple);
+      border-radius:10px 10px 0 0;
+      transition:background .2s;
     }
 
-    .bar span{
+    .bar:hover .bar-top{background:var(--lime);}
+
+    .bar-label{
       position:absolute;
-      top:12px;
-      left:50%;
+      top:8px;left:50%;
       transform:translateX(-50%);
-      color:#fff;
-      font-size:16px;
+      font-size:11px;
       font-weight:600;
+      color:rgba(255,255,255,.7);
+      white-space:nowrap;
     }
 
-    .see{
-      position:absolute;
-      left:24px;
-      bottom:18px;
-      font-size:13px;
+    .month-labels{
       display:flex;
-      align-items:center;
       gap:8px;
-      opacity:.8;
+      margin-top:8px;
     }
 
-    .see::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#8d73f6;
+    .month-labels span{
+      flex:1;
+      text-align:center;
+      font-size:10px;
+      color:var(--muted);
+      font-family:'DM Mono',monospace;
     }
 
-    /* =========================
-       BALANCE GRAPH
-    ========================== */
-
+    /* BALANCE GRAPH */
     .graph-card{
-      background:#d8f36c;
-      padding:22px;
-      min-height:255px;
-      overflow:hidden;
+      background:var(--card-alt);
+      padding:24px;
+      min-height:240px;
     }
 
-    .tabs{
-      position:absolute;
-      top:22px;
-      right:22px;
+    .graph-header{
       display:flex;
-      gap:10px;
       align-items:center;
+      justify-content:space-between;
+      margin-bottom:16px;
     }
+
+    .graph-title{font-size:16px;font-weight:600;}
+
+    .tabs{display:flex;gap:6px;}
 
     .tab{
-      font-size:12px;
+      font-size:11px;
       font-weight:600;
-    }
-
-    .active{
-      background:#111;
-      color:#fff;
-      padding:8px 12px;
+      padding:5px 11px;
       border-radius:999px;
+      cursor:pointer;
+      color:var(--muted);
+      letter-spacing:.04em;
+      border:1px solid transparent;
+      transition:all .15s;
     }
 
-    .stats{
-      margin-top:18px;
+    .tab.active{
+      background:var(--text);
+      color:#111;
+      border-color:var(--text);
+    }
+
+    .tab:hover:not(.active){color:var(--text);border-color:var(--border);}
+
+    .graph-stats{
       display:flex;
-      flex-direction:column;
-      gap:8px;
-      font-size:16px;
+      gap:18px;
+      margin-bottom:14px;
     }
 
-    .stats span{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+    .stat-item{font-size:13px;}
+    .stat-val{font-weight:600;color:var(--text);}
+    .stat-pct{font-size:11px;color:var(--teal);margin-left:4px;}
+    .stat-muted{color:var(--muted);}
 
-    .stats span::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#8d73f6;
-    }
-
-    .big-percent{
-      position:absolute;
-      left:20px;
-      bottom:0;
-      font-size:120px;
-      font-weight:700;
-      letter-spacing:-7px;
-      line-height:1;
-    }
-
-    .chart{
-      position:absolute;
-      right:12px;
-      bottom:10px;
-      width:58%;
-      height:75%;
-    }
-
-    .chart svg{
+    .chart-canvas-wrap{
+      position:relative;
       width:100%;
-      height:100%;
+      height:140px;
     }
 
-    @media(max-width:1050px){
-
-      .dashboard{
-        grid-template-columns:1fr;
-      }
-
-      .circle-wrap{
-        width:280px;
-        height:280px;
-      }
-
-      .money,
-      .price,
-      .performance-number{
-        font-size:58px;
-      }
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr;}
     }
-
   </style>
 </head>
 <body>
 
-  <section class="dashboard">
+  <section class="grid">
 
     <!-- LEFT -->
-    <div class="column">
-
+    <div class="col">
       <div class="card expenses">
+        <div class="pill"><div class="pill-dot"></div>Expenses</div>
+        <div class="section-label">Past 7 days</div>
 
-        <div class="pill">EXPENSES</div>
-        <div class="subtitle">In the past 7 days</div>
-
-        <div class="circle-wrap">
-
+        <div class="donut-wrap">
           <svg viewBox="0 0 220 220">
-
-            <circle
-              cx="110"
-              cy="110"
-              r="78"
-              stroke="#8d73f6"
-              stroke-width="16"
-              stroke-linecap="round"
-              stroke-dasharray="120 400"
-              fill="none"
-            />
-
-            <circle
-              cx="110"
-              cy="110"
-              r="78"
-              stroke="#d8f36c"
-              stroke-width="16"
-              stroke-linecap="round"
-              stroke-dasharray="80 400"
-              stroke-dashoffset="-135"
-              fill="none"
-            />
-
-            <circle
-              cx="110"
-              cy="110"
-              r="78"
-              stroke="#f3ca7a"
-              stroke-width="16"
-              stroke-linecap="round"
-              stroke-dasharray="65 400"
-              stroke-dashoffset="-235"
-              fill="none"
-            />
-
-            <circle
-              cx="110"
-              cy="110"
-              r="78"
-              stroke="#34c2b3"
-              stroke-width="16"
-              stroke-linecap="round"
-              stroke-dasharray="170 400"
-              stroke-dashoffset="-320"
-              fill="none"
-            />
-
+            <circle cx="110" cy="110" r="90" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="18"/>
+            <circle id="arc1" cx="110" cy="110" r="90" fill="none" stroke="#30c4aa" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 566" stroke-dashoffset="0"/>
+            <circle id="arc2" cx="110" cy="110" r="90" fill="none" stroke="#9d84ff" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 566" stroke-dashoffset="0"/>
+            <circle id="arc3" cx="110" cy="110" r="90" fill="none" stroke="#c9f170" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 566" stroke-dashoffset="0"/>
+            <circle id="arc4" cx="110" cy="110" r="90" fill="none" stroke="#f0c060" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 566" stroke-dashoffset="0"/>
           </svg>
-
-          <div class="center">32K</div>
-
+          <div class="donut-center">
+            <div class="donut-amount">$32K</div>
+            <div class="donut-sub">total spend</div>
+          </div>
         </div>
 
         <div class="legend">
-
-          <div class="legend-item">
-            <div class="legend-left">
-              <div class="dot teal"></div>
-              <span>Relax</span>
-            </div>
-            <strong>54%</strong>
+          <div class="legend-row">
+            <div class="legend-left"><div class="dot" style="background:#30c4aa"></div><span class="legend-name">Relax</span></div>
+            <div class="legend-bar-wrap"><div class="legend-bar" style="background:#30c4aa" data-w="54"></div></div>
+            <span class="legend-pct">54%</span>
           </div>
-
-          <div class="legend-item">
-            <div class="legend-left">
-              <div class="dot purple"></div>
-              <span>Food</span>
-            </div>
-            <strong>27%</strong>
+          <div class="legend-row">
+            <div class="legend-left"><div class="dot" style="background:#9d84ff"></div><span class="legend-name">Food</span></div>
+            <div class="legend-bar-wrap"><div class="legend-bar" style="background:#9d84ff" data-w="27"></div></div>
+            <span class="legend-pct">27%</span>
           </div>
-
-          <div class="legend-item">
-            <div class="legend-left">
-              <div class="dot lime"></div>
-              <span>Transport</span>
-            </div>
-            <strong>12%</strong>
+          <div class="legend-row">
+            <div class="legend-left"><div class="dot" style="background:#c9f170"></div><span class="legend-name">Transport</span></div>
+            <div class="legend-bar-wrap"><div class="legend-bar" style="background:#c9f170" data-w="12"></div></div>
+            <span class="legend-pct">12%</span>
           </div>
-
-          <div class="legend-item">
-            <div class="legend-left">
-              <div class="dot orange"></div>
-              <span>Pets</span>
-            </div>
-            <strong>7%</strong>
+          <div class="legend-row">
+            <div class="legend-left"><div class="dot" style="background:#f0c060"></div><span class="legend-name">Pets</span></div>
+            <div class="legend-bar-wrap"><div class="legend-bar" style="background:#f0c060" data-w="7"></div></div>
+            <span class="legend-pct">7%</span>
           </div>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- CENTER -->
-    <div class="column">
-
-      <div class="card balance-card">
-
-        <div class="icon">↑</div>
-        <div class="percent">+3,51 %</div>
-
-        <div class="money">$ 1248</div>
-        <div class="small">Current balance</div>
-
+    <div class="col">
+      <div class="card balance">
+        <div class="bal-icon">
+          <svg width="18" height="18" fill="none" stroke="#c9f170" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 14V4M5 8l4-4 4 4"/>
+          </svg>
+        </div>
+        <div class="bal-amount">$1,248</div>
+        <div class="bal-row">
+          <span class="bal-label">Current balance</span>
+          <span class="badge-up">+3.51%</span>
+        </div>
       </div>
 
       <div class="card progress-card">
-
-        <div class="progress-title">Progress</div>
-        <div class="progress-value">↑72,5%</div>
-
-        <div class="green-pill">+0,10 (+0,13%)</div>
-
+        <div class="prog-label">Monthly progress</div>
+        <div class="prog-value">72.5%</div>
+        <div class="track"><div class="fill" id="prog-fill"></div></div>
+        <span class="prog-badge">+0.10 (+0.13%)</span>
       </div>
 
       <div class="card subs-card">
-
-        <div class="mini">THIS MONTH</div>
-        <div class="subs">4 subs</div>
-
-        <div class="mini" style="margin-top:18px;">TOTAL</div>
-        <div class="price">$25.99</div>
-
-        <div class="bottom-text">
-          NEXT PAYMENT IN 4 DAYS<br>
-          <strong>Spotify - $9.99</strong>
+        <div class="subs-top">
+          <div>
+            <div class="subs-micro">This month</div>
+            <div class="subs-count">4 subs</div>
+          </div>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+            <path d="M11 18h14M18 11l7 7-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-
+        <div class="subs-divider"></div>
+        <div class="subs-micro">Total</div>
+        <div class="subs-price">$25.99</div>
+        <div class="subs-next">
+          Next payment in 4 days<br>
+          <strong>Spotify · $9.99</strong>
+        </div>
       </div>
-
     </div>
 
     <!-- RIGHT -->
-    <div class="column">
-
-      <!-- PERFORMANCE -->
-      <div class="card performance-card">
-
-        <div class="orange-pill">PERFORMANCE</div>
-
-        <div class="performance-number">+280%</div>
-        <div class="performance-sub">In the past 30 days</div>
-
-        <div class="bars">
-
-          <div class="bar" style="height:80px;">
-            <span>12%</span>
+    <div class="col">
+      <div class="card performance">
+        <div class="perf-header">
+          <div>
+            <div class="perf-pill">Performance</div>
+            <div class="perf-number">+280%</div>
+            <div class="perf-sub">In the past 30 days</div>
           </div>
-
-          <div class="bar" style="height:160px;">
-            <span>78%</span>
-          </div>
-
-          <div class="bar" style="height:115px;">
-            <span>62%</span>
-          </div>
-
-          <div class="bar" style="height:140px;">
-            <span>70%</span>
-          </div>
-
-          <div class="bar" style="height:160px;">
-            <span>75%</span>
-          </div>
-
-          <div class="bar" style="height:220px;">
-            <span>95%</span>
-          </div>
-
         </div>
 
-        <div class="see">SEE ALL</div>
-
+        <div class="bars-wrap" id="bars-wrap">
+          <div class="bar" data-h="70"><div class="bar-top"></div><div class="bar-label">12%</div></div>
+          <div class="bar" data-h="140"><div class="bar-top"></div><div class="bar-label">78%</div></div>
+          <div class="bar" data-h="100"><div class="bar-top"></div><div class="bar-label">62%</div></div>
+          <div class="bar" data-h="122"><div class="bar-top"></div><div class="bar-label">70%</div></div>
+          <div class="bar" data-h="131"><div class="bar-top"></div><div class="bar-label">75%</div></div>
+          <div class="bar" data-h="175"><div class="bar-top"></div><div class="bar-label">95%</div></div>
+        </div>
+        <div class="month-labels">
+          <span>Jan</span><span>Feb</span><span>Mar</span>
+          <span>Apr</span><span>May</span><span>Jun</span>
+        </div>
       </div>
 
-      <!-- GRAPH -->
       <div class="card graph-card">
-
-        <h2>Balance</h2>
-
-        <div class="tabs">
-          <div class="tab">WEEKLY</div>
-          <div class="tab active">MONTHLY</div>
+        <div class="graph-header">
+          <span class="graph-title">Balance</span>
+          <div class="tabs">
+            <div class="tab" onclick="switchTab(this,'weekly')">Weekly</div>
+            <div class="tab active" onclick="switchTab(this,'monthly')">Monthly</div>
+          </div>
         </div>
 
-        <div class="stats">
-          <span>12450 (40%)</span>
-          <span>11252 (11%)</span>
+        <div class="graph-stats">
+          <div class="stat-item">
+            <span class="stat-val">$12,450</span>
+            <span class="stat-pct">↑40%</span>
+            <div class="stat-muted" style="font-size:11px;margin-top:2px;">Income</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">$11,252</span>
+            <span class="stat-pct" style="color:#ff6b6b;">↓11%</span>
+            <div class="stat-muted" style="font-size:11px;margin-top:2px;">Expenses</div>
+          </div>
         </div>
 
-        <div class="big-percent">5%</div>
-
-        <div class="chart">
-
-          <svg viewBox="0 0 400 220" fill="none">
-
-            <!-- Grid -->
-            <g opacity=".15">
-              <line x1="20" y1="20" x2="20" y2="180" stroke="#111"/>
-              <line x1="80" y1="20" x2="80" y2="180" stroke="#111"/>
-              <line x1="140" y1="20" x2="140" y2="180" stroke="#111"/>
-              <line x1="200" y1="20" x2="200" y2="180" stroke="#111"/>
-              <line x1="260" y1="20" x2="260" y2="180" stroke="#111"/>
-              <line x1="320" y1="20" x2="320" y2="180" stroke="#111"/>
-            </g>
-
-            <!-- Purple line -->
-            <path
-              d="M20 120
-                 C60 40, 90 140, 140 80
-                 S220 150, 260 90
-                 S330 140, 360 80"
-              stroke="#8d73f6"
-              stroke-width="4"
-              stroke-dasharray="8 8"
-              fill="none"
-              stroke-linecap="round"
-            />
-
-            <!-- Green line -->
-            <path
-              d="M20 160
-                 C60 160, 80 110, 120 110
-                 S180 50, 220 90
-                 S280 120, 320 40"
-              stroke="#34c2b3"
-              stroke-width="5"
-              fill="none"
-              stroke-linecap="round"
-            />
-
-            <circle cx="185" cy="92" r="8" fill="#8d73f6"/>
-
-            <!-- Tooltip -->
-            <rect x="150" y="30" width="80" height="52" rx="12" fill="#fff"/>
-            <text x="190" y="52" text-anchor="middle" fill="#111" font-size="18" font-weight="700">
-              12 450
-            </text>
-            <text x="190" y="70" text-anchor="middle" fill="#555" font-size="12">
-              PROFIT
-            </text>
-
-          </svg>
-
+        <div class="chart-canvas-wrap">
+          <canvas id="balChart" role="img" aria-label="Balance line chart showing income vs expenses over monthly period">Monthly balance: income $12,450 vs expenses $11,252.</canvas>
         </div>
-
       </div>
-
     </div>
 
   </section>
+
+  <script defer>
+    const C = 2 * Math.PI * 90;
+
+    function animateDonut() {
+      const segments = [
+        { id: 'arc1', pct: 54, offset: 0 },
+        { id: 'arc2', pct: 27, offset: 54 },
+        { id: 'arc3', pct: 12, offset: 81 },
+        { id: 'arc4', pct: 7,  offset: 93 },
+      ];
+      const gap = 1.5;
+      segments.forEach(d => {
+        const el = document.getElementById(d.id);
+        const len = (d.pct / 100) * C - gap;
+        const offset = -(d.offset / 100) * C;
+        el.style.transition = 'stroke-dasharray 1.2s cubic-bezier(.4,0,0,1), stroke-dashoffset 1.2s cubic-bezier(.4,0,0,1)';
+        el.style.strokeDasharray = len + ' ' + (C - len);
+        el.style.strokeDashoffset = offset;
+      });
+    }
+
+    function animateBars() {
+      document.querySelectorAll('.bar').forEach((bar, i) => {
+        setTimeout(() => {
+          bar.style.transition = 'height .7s cubic-bezier(.4,0,0,1)';
+          bar.style.height = bar.dataset.h + 'px';
+        }, i * 60);
+      });
+    }
+
+    function animateLegendBars() {
+      document.querySelectorAll('.legend-bar').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+    }
+
+    function animateProgress() {
+      document.getElementById('prog-fill').style.width = '72.5%';
+    }
+
+    const monthlyData = {
+      labels:   ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      income:   [8200, 9100, 10400, 9800, 11200, 12100, 11500, 13000, 12450, 11800, 12900, 13500],
+      expenses: [7500, 8200,  8900, 9200, 10100, 10500, 10800, 11000, 11252, 10900, 11100, 11800],
+    };
+
+    const weeklyData = {
+      labels:   ['W1','W2','W3','W4'],
+      income:   [2800, 3100, 3200, 3350],
+      expenses: [2400, 2750, 2900, 3200],
+    };
+
+    let currentChart;
+
+    function buildChart(mode) {
+      if (currentChart) currentChart.destroy();
+      const d = mode === 'monthly' ? monthlyData : weeklyData;
+      currentChart = new Chart(document.getElementById('balChart'), {
+        type: 'line',
+        data: {
+          labels: d.labels,
+          datasets: [
+            {
+              label: 'Income',
+              data: d.income,
+              borderColor: '#30c4aa',
+              borderWidth: 2.5,
+              pointRadius: 0,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: '#30c4aa',
+              tension: .4,
+              fill: false,
+            },
+            {
+              label: 'Expenses',
+              data: d.expenses,
+              borderColor: '#9d84ff',
+              borderWidth: 2,
+              borderDash: [5, 4],
+              pointRadius: 0,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: '#9d84ff',
+              tension: .4,
+              fill: false,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 600 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(22,27,36,.95)',
+              borderColor: 'rgba(255,255,255,.1)',
+              borderWidth: 1,
+              titleColor: '#8a8f9e',
+              bodyColor: '#f0f0ec',
+              padding: 10,
+              callbacks: {
+                label: ctx => ' $' + ctx.parsed.y.toLocaleString()
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255,255,255,.04)' },
+              ticks: { color: '#8a8f9e', font: { size: 10, family: "'DM Mono', monospace" } },
+              border: { display: false }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,.04)' },
+              ticks: {
+                color: '#8a8f9e',
+                font: { size: 10, family: "'DM Mono', monospace" },
+                callback: v => '$' + (v / 1000).toFixed(0) + 'k'
+              },
+              border: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    function switchTab(el, mode) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      buildChart(mode);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      animateDonut();
+      animateBars();
+      animateLegendBars();
+      animateProgress();
+      buildChart('monthly');
+    });
+  </script>
 
 </body>
 </html>
